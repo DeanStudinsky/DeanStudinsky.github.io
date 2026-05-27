@@ -308,7 +308,12 @@
 
         @media (max-width: 768px) {
             #project-sidebar {
-                width: 80%;
+                width: 85%;
+                padding: 9rem 1.5rem 2rem;
+            }
+
+            #project-sidebar .close-btn {
+                top: 7.5rem;
             }
         }
 
@@ -533,7 +538,11 @@
 
     <!-- Project Details Sidebar -->
     <div id="project-sidebar">
-        <span class="close-btn" id="close-sidebar">Ã—</span>
+        <span class="close-btn" id="close-sidebar">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </span>
         <div class="sidebar-content">
             <h1 class="text-2xl md:text-4xl font-bold mb-4 text-pip-accent border-b-2 border-pip-secondary pb-2">
                 <span id="selected-project-title">Select a Project</span>
@@ -541,8 +550,11 @@
             <p id="project-description" class="text-lg mb-6 text-white/90">
                 Click a project from the radial menu to see its details here.
             </p>
-            <a id="selected-project-link" href="#" target="_blank" class="inline-block px-6 py-3 bg-pip-accent/20 text-pip-accent border-2 border-pip-accent rounded-lg hover:bg-pip-accent hover:text-black transition-all font-semibold hidden">
-                View Repository â†’
+            <a id="selected-project-link" href="#" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-pip-accent/20 text-pip-accent border-2 border-pip-accent rounded-lg hover:bg-pip-accent hover:text-black transition-all font-semibold hidden">
+                <span id="selected-project-link-text">View Project</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                </svg>
             </a>
         </div>
     </div>
@@ -701,7 +713,7 @@
             selectedTitle.textContent = name;
             selectedTitle.style.color = itemColor;
             selectedLink.href = url;
-            selectedLink.textContent = `View ${name} â†’`;
+            document.getElementById(‘selected-project-link-text’).textContent = `View ${name}`;
             selectedLink.classList.remove('hidden');
             selectedLink.style.borderColor = itemColor;
             selectedLink.style.color = itemColor;
