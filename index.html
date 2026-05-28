@@ -120,6 +120,7 @@
             cursor: pointer;
             z-index: 50;
             pointer-events: auto;
+            touch-action: manipulation;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
             animation: expandIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.3s forwards;
@@ -876,6 +877,14 @@
         window.onload = function() {
             renderMenuItems();
             toggleButton.addEventListener('click', toggleMenu);
+
+            // Fix iOS Safari hit-area bug: CSS animation fill-mode doesn't update
+            // the tap target, so we swap to an inline style after animation ends.
+            toggleButton.addEventListener('animationend', () => {
+                toggleButton.style.animation = 'none';
+                toggleButton.style.transform = 'translate(-50%, -50%) scale(1)';
+                toggleButton.style.opacity = '1';
+            }, { once: true });
             document.addEventListener('mousemove', updateFlareColor);
             window.addEventListener('resize', () => {
                 const wasOpen = menuContainer.classList.contains('is-open');
